@@ -16,8 +16,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 # provide the credentials to connect to HANA Cloud DB
-HANA_USER_VDB = os.getenv('HANA_USER_VDB')
-HANA_PASSWORD_VDB = os.getenv('HANA_PASSWORD_VDB')
 HANA_HOST = os.getenv('HANA_HOST_VECTOR')
 HANA_USER = os.getenv('HANA_VECTOR_USER') 
 HANA_PASSWD = os.getenv('HANA_VECTOR_PASS') 
@@ -40,9 +38,9 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_DEPLOYMENT_ENDPOINT = os.getenv("OPENAI_EMBEDDING_ENDPOINT")
 OPENAI_DEPLOYMENT_VERSION = os.getenv("OPENAI_DEPLOYMENT_VERSION")
 openai.api_type = "azure"
-openai.api_version = OPENAI_DEPLOYMENT_VERSION
-openai.api_base = OPENAI_DEPLOYMENT_ENDPOINT
-openai.api_key = OPENAI_API_KEY
+openai.api_version = OPENAI_DEPLOYMENT_VERSION  #Your Azure OpenAI Version
+openai.api_base = OPENAI_DEPLOYMENT_ENDPOINT #Your Azure OpenAI Endpoint
+openai.api_key = OPENAI_API_KEY  #Your Azure OpenAI Key
 #initiate the client to use AzureOpenAI for embedding and completion
 client = AzureOpenAI(
   api_key = OPENAI_API_KEY ,  

@@ -29,7 +29,7 @@ HANA_PASSWORD_VDB = os.getenv('HANA_VECTOR_PASS')
 # Get the HANA Cloud host from environment variables
 HANA_HOST  = os.getenv('HANA_HOST_VECTOR')
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_LCHAIN"#Provide the table name where you want the embedded data to be stored
+TABLE_NAME  = "CUSTOMER_REVIEWS_LCHAIN" #Provide the table name where you want the embedded data to be stored 
 # Establish a connection to the HANA Cloud database using HANA_ML package
 conn = dataframe.ConnectionContext(
     address=HANA_HOST,  
@@ -37,10 +37,9 @@ conn = dataframe.ConnectionContext(
     user=HANA_USER_VDB,
     password=HANA_PASSWORD_VDB,
     current_schema=SCHEMA_NAME,
-    #schema = SCHEMA_NAME,
     encrypt='true'
 )
-print(conn.get_current_schema())
+#print(conn.get_current_schema())
 # Establish a second connection to the HANA Cloud database using dbapi.connect
 conn1 = dbapi.connect(
     address=HANA_HOST, 
@@ -70,11 +69,16 @@ docs: List[Document] = [
 db = HanaDB(
     connection=conn1,
     embedding=embeddings,
-   # schema = "VDEMO1",
-    table_name="REVIEWS",
+    table_name=TABLE_NAME,
     content_column="TEXT",
     metadata_column="FILENAME",
     vector_column="VECTOR"
 )
 #finally appending the json documents using add_documents
-db.add_documents(docs)
+#db.add_documents(docs)
+try:
+    #finally appending the json documents using add_documents
+    db.add_documents(docs)
+    print(f"Table {TABLE_NAME} has been created successfully.")
+except Exception as e:
+    print(f"An error occurred: {e}")

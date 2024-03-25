@@ -13,7 +13,7 @@ from langchain_openai import AzureOpenAIEmbeddings,OpenAIEmbeddings
 #import the vector store modules to access "HanaDB"
 from langchain_community.vectorstores.hanavector import HanaDB
 #make sure you add azure_deployment(deployment name for embedding model),azure_endpoint(Endpoint from Azure portal) & api_key
-embeddings = AzureOpenAIEmbeddings(azure_deployment="t4sap",azure_endpoint="https://sap-openai.openai.azure.com/",api_key="93c4ccc9eac54631afcf7b181cc48b0f",api_version="2023-03-15-preview")
+embeddings = AzureOpenAIEmbeddings(azure_deployment="<your deployment>",azure_endpoint="<your endpoint>",api_key="<your key>",api_version="<your api version>")
 #if you are using OpenAI Keys, the provide the parameters as below
 #embeddings = OpenAIEmbeddings(model="text-embedding-ada-002",api_key="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")
 import os
@@ -31,7 +31,7 @@ HANA_PASSWORD_VDB = os.getenv('HANA_VECTOR_PASS')
 # Get the HANA Cloud host from environment variables
 HANA_HOST  = os.getenv('HANA_HOST_VECTOR')
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_LCHAIN1"#Provide the table name where you want the embedded data to be stored
+TABLE_NAME  = "CUSTOMER_REVIEWS_AOAI"#Provide the table name where you want the embedded data to be stored
 # Establish a connection to the HANA Cloud database using HANA_ML package
 conn = dataframe.ConnectionContext(
     address=HANA_HOST,  
@@ -75,10 +75,16 @@ docs: List[Document] = [
 db = HanaDB(
     connection=conn1,
     embedding=embeddings, 
-    table_name="REVIEWS4",
+    table_name=TABLE_NAME,
     content_column="TEXT",
     metadata_column="FILENAME",
     vector_column="VECTOR"
 )
 #finally appending the json documents using add_documents which will create the new table REVIEWS
-db.add_documents(docs)
+#db.add_documents(docs)
+try:
+    #finally appending the json documents using add_documents
+    db.add_documents(docs)
+    print(f"Table {TABLE_NAME} has been created successfully.")
+except Exception as e:
+    print(f"An error occurred: {e}")

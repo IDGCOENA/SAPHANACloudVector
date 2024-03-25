@@ -48,7 +48,7 @@ conn1 = dbapi.connect(
     password=HANA_PASSWORD_VDB   
 )
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the EXISTING schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_1K"#Provide ANY new table name where you want the embedded data to be stored 
+TABLE_NAME  = "CUSTOMER_REVIEWS_HH20"#Provide ANY new table name where you want the embedded data to be stored 
 #Create the table the first time you execute the script. And from the second iteration, it will directly select from the table
 if not conn.has_table(table=TABLE_NAME, schema=SCHEMA_NAME):
     conn.create_table(table=TABLE_NAME, schema=SCHEMA_NAME, table_structure={'FILENAME':'NVARCHAR(100)','TEXT':'NCLOB','VECTOR':'REAL_VECTOR(1536)'})

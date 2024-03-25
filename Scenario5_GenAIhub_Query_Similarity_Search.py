@@ -16,8 +16,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 # provide the credentials to connect to HANA Cloud DB
-HANA_USER_VDB = os.getenv('HANA_USER_VDB')
-HANA_PASSWORD_VDB = os.getenv('HANA_PASSWORD_VDB')
 HANA_HOST = os.getenv('HANA_HOST_VECTOR')
 HANA_USER = os.getenv('HANA_VECTOR_USER') 
 HANA_PASSWD = os.getenv('HANA_VECTOR_PASS') 

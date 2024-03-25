@@ -22,24 +22,29 @@ import tiktoken
 import re
 # Import the load_dotenv function from dotenv. To load the credentials from env file
 from dotenv import load_dotenv
+# Load environment variables from a .env file
 load_dotenv()
-#Because of dotenv file loaded with env file with credentials, you could use it withour exposing the 
-#actual credentials in the code
-HANA_USER_VDB = os.getenv('HANA_USER_VDB') # Get the HANA Cloud username from environment variables
-HANA_PASSWORD_VDB = os.getenv('HANA_PASSWORD_VDB') # Get the HANA Cloud password from environment variables
+# Get the HANA Cloud username from environment variables
+HANA_USER_VDB = os.getenv('HANA_VECTOR_USER')
+# Get the HANA Cloud password from environment variables
+HANA_PASSWORD_VDB = os.getenv('HANA_VECTOR_PASS')
+# Get the HANA Cloud host from environment variables
+HANA_HOST  = os.getenv('HANA_HOST_VECTOR')
+
+# Establish a connection to the HANA Cloud database using HANA_ML package
 conn = dataframe.ConnectionContext(
-    address= '2b32dccc-1e09-4022-883e-743be218a694.hna0.canary-eu10.hanacloud.ondemand.com',
+    address=HANA_HOST,  
     port=443,
-    user="DBADMIN", 
-    password="Hana2024!",
+    user=HANA_USER_VDB,
+    password=HANA_PASSWORD_VDB,
     encrypt='true'
 )
+# Establish a second connection to the HANA Cloud database using dbapi.connect
 conn1 = dbapi.connect(
-    address = '2b32dccc-1e09-4022-883e-743be218a694.hna0.canary-eu10.hanacloud.ondemand.com',
+    address=HANA_HOST, 
     port=443, 
-    user="DBADMIN", 
-    password="Hana2024!",
-    schema = "VIVEK"
+    user=HANA_USER_VDB, 
+    password=HANA_PASSWORD_VDB   
 )
 # Define helper functions to clean up the source text files
 def normalize_text(s, sep_token = " \n "):
@@ -51,7 +56,7 @@ def normalize_text(s, sep_token = " \n "):
     s = s.strip()    
     return s
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the EXISTING schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_1K"#Provide ANY new table name where you want the embedded data to be stored
+TABLE_NAME  = "CUSTOMER_REVIEWS_LC4"#Provide ANY new table name where you want the embedded data to be stored
 #Create the table the first time you execute the script. And from the second iteration, it will directly select from the table
 if not conn.has_table(table=TABLE_NAME, schema=SCHEMA_NAME):
     conn.create_table(table=TABLE_NAME, schema=SCHEMA_NAME, table_structure={'FILENAME':'NVARCHAR(100)','TEXT':'NCLOB','VECTOR':'REAL_VECTOR(1536)'})

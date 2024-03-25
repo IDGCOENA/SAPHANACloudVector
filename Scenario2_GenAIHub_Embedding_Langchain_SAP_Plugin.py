@@ -29,7 +29,7 @@ HANA_PASSWORD_VDB = os.getenv('HANA_VECTOR_PASS')
 # Get the HANA Cloud host from environment variables
 HANA_HOST  = os.getenv('HANA_HOST_VECTOR')
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_LCHAIN" #Provide the table name where you want the embedded data to be stored 
+TABLE_NAME  = "REVIEWS_TARGET" #Provide the table name where you want the embedded data to be stored 
 # Establish a connection to the HANA Cloud database using HANA_ML package
 conn = dataframe.ConnectionContext(
     address=HANA_HOST,  

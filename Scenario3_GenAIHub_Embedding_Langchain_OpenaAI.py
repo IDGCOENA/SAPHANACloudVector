@@ -15,7 +15,7 @@ from langchain_community.vectorstores.hanavector import HanaDB
 #make sure you add azure_deployment(deployment name for embedding model),azure_endpoint(Endpoint from Azure portal) & api_key
 embeddings = AzureOpenAIEmbeddings(azure_deployment="<your deployment>",azure_endpoint="<your endpoint>",api_key="<your key>",api_version="<your api version>")
 #if you are using OpenAI Keys, the provide the parameters as below
-#embeddings = OpenAIEmbeddings(model="text-embedding-ada-002",api_key="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")
+#embeddings = OpenAIEmbeddings(model="text-embedding-ada-002",api_key="<Your OpenAI Key>")
 import os
 from dotenv import load_dotenv
 import hana_ml.dataframe as dataframe

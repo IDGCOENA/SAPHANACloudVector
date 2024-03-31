@@ -5,7 +5,7 @@
    https://python.langchain.com/docs/integrations/vectorstores/sap_hanavector
    Data source is provided as part of the mission. 
    Please install the necessary packages 
-    pip install   hdbcli || hana_ml || datetime || tiktoken || re || python-dotenv || shapely 
+    pip install   hdbcli || hana_ml || datetime || tiktoken || python-dotenv || shapely 
                   ||typing || langchain-community || langchain || openai
 """
 #import the necessary linraries from langchain to use OpenAI/Azure Open AI

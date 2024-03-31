@@ -4,7 +4,7 @@
    This would be the easier approach to embed and ingest the data as this is process is handled by the plugin 
    Data source is provided as part of the mission. 
    Please install the necessary packages 
-    pip install   generative-ai-hub-sdk ||hdbcli || hana_ml || datetime || tiktoken || re || python-dotenv || shapely 
+    pip install   generative-ai-hub-sdk ||hdbcli || hana_ml || datetime || tiktoken || python-dotenv || shapely 
                   ||typing || langchain-community || langchain
 """
 # Import the embeddings module from SAPs Generative AI Hub SDK

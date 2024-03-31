@@ -5,7 +5,7 @@
     as compared the the langchain plugin provided by SAP.
     Data source is provided as part of the mission. 
    Please install the necessary packages 
-    pip install   generative-ai-hub-sdk ||hdbcli || hana_ml || datetime || tiktoken || re || python-dotenv || shapely    
+    pip install   generative-ai-hub-sdk ||hdbcli || hana_ml || datetime || tiktoken || python-dotenv || shapely    
 """
 # Import the embeddings module from SAPs Generative AI Hub SDK
 from gen_ai_hub.proxy.native.openai import embeddings

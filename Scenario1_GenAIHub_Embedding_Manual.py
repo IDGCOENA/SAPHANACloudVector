@@ -48,14 +48,14 @@ conn1 = dbapi.connect(
     password=HANA_PASSWORD_VDB   
 )
 SCHEMA_NAME = "VECTOR_DEMO"  #Provide the EXISTING schema name where you want the embedded data to be stored 
-TABLE_NAME  = "CUSTOMER_REVIEWS_HH20"#Provide ANY new table name where you want the embedded data to be stored 
+TABLE_NAME  = "CUSTOMER_REVIEWS_1K"#Provide ANY new table name where you want the embedded data to be stored 
 #Create the table the first time you execute the script. And from the second iteration, it will directly select from the table
 if not conn.has_table(table=TABLE_NAME, schema=SCHEMA_NAME):
     conn.create_table(table=TABLE_NAME, schema=SCHEMA_NAME, table_structure={'FILENAME':'NVARCHAR(100)','TEXT':'NCLOB','VECTOR':'REAL_VECTOR(1536)'})
 #Select the columns from JSON document "REVIEWS_1K" that is provided as part of the test schema
 #If you are using SAP HANA Cloud as part of Free Tier, then you can select from the table "REVIEWS_SOURCE"
 #We make use of the multimodeling feature here to read content from JSON to SQL directly 
-Free_Tier = ''  # If You are NOT using Free Tier, then set it to ''
+Free_Tier = 'X'  # If You are NOT using Free Tier, then set it to ''
 
 if Free_Tier == 'X':
     df2 = conn.sql('select "filename", "text" from "VECTOR_DEMO"."REVIEWS_SOURCE" LIMIT 100') # Select from table
